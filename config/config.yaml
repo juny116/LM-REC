@@ -1,0 +1,5 @@
+seed: 42
+
+defaults:
+  - template: t1
+  - _self_

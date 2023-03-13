@@ -6,3 +6,4 @@ tqdm
 hydra-core
 scikit-learn
 pandas
+openai

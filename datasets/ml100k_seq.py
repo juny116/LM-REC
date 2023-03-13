@@ -120,16 +120,6 @@ class ML100kSeq(datasets.GeneratorBasedBuilder):
                     "target": datasets.Value("string"),
                 }
             )
-        # else:
-        #     features = datasets.Features(
-        #         {
-        #             "uid": datasets.Value("string"),
-        #             "age": datasets.Value("int64"),
-        #             "gender": datasets.Value("string"),
-        #             "occupation": datasets.Value("string"),
-        #             "zip_code": datasets.Value("string"),
-        #         }
-        #     )
 
         return datasets.DatasetInfo(
             description=_DESCRIPTION,
@@ -192,27 +182,27 @@ class ML100kSeq(datasets.GeneratorBasedBuilder):
             sub_df = df.loc[df['uid'] == uid].sort_values(by='timestamp')
             sub_iid_list = list(sub_df['iid'])
 
-            candidates = random.sample([item for item in iid_list if item not in sub_iid_list], 100)
+            candidates = random.sample([item for item in iid_list if item not in sub_iid_list], 10)
             
             # list(sub.loc[sub['rating'] == '1']['iid'])
             if split == "train":
                 yield uid, {
                         "uid": uid,
-                        "seq": sub_iid_list[-20:-2],
+                        "seq": sub_iid_list[-10:-2],
                         "target": None,
                         "candidates": candidates
                     }
             elif split == "validation":
                 yield uid, {
                         "uid": uid,
-                        "seq": sub_iid_list[-20:-2],
+                        "seq": sub_iid_list[-10:-2],
                         "target": sub_iid_list[-2],
                         "candidates": candidates
                     }
             elif split == "test":
                 yield uid, {
                         "uid": uid,
-                        "seq": sub_iid_list[-20:-1],
+                        "seq": sub_iid_list[-10:-1],
                         "target": sub_iid_list[-1],
                         "candidates": candidates
                     }

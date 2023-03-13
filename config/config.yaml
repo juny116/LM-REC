@@ -1,4 +1,7 @@
 seed: 42
+max_test_samples: 100
+
+output_dir: ./outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
 
 defaults:
   - template: t1

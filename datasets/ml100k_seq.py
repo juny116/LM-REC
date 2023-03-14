@@ -183,7 +183,8 @@ class ML100kSeq(datasets.GeneratorBasedBuilder):
             sub_iid_list = list(sub_df['iid'])
 
             candidates = random.sample([item for item in iid_list if item not in sub_iid_list], 10)
-            
+            if len(candidates) < 10:
+                continue
             # list(sub.loc[sub['rating'] == '1']['iid'])
             if split == "train":
                 yield uid, {
